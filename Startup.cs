@@ -14,6 +14,7 @@ namespace WebApplication3
     {
         public Startup(IConfiguration configuration)
         {
+            //Edited to verify the CI process.
             Configuration = configuration;
         }
 
