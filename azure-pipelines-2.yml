@@ -6,6 +6,11 @@
 trigger:
 - master
 
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
 jobs:
 - job: CreateSelfhostedAgent
   displayName: 'Run Selfhosted Agent'
@@ -13,19 +18,14 @@ jobs:
     name: 'Default'
     vmImage: 'selfhostedagent'
 
-variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+    -task: NuGetToolInstaller@1
 
-  -task1: NuGetToolInstaller@1
-
-  -task2: NuGetCommand@2
-  inputs1:
+    -task2: NuGetCommand@2
+    inputs1:
       restoreSolution: '$(solution)'
 
-  -task3: VSBuild@1
-  inputs2:
+    -task3: VSBuild@1
+    inputs2:
     solution: '$(solution)'
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
     platform: '$(buildPlatform)'
