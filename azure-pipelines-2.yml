@@ -6,9 +6,12 @@
 trigger:
 - master
 
-pool:
-  name: 'Default'
-  vmImage: 'selfhostedagent'
+jobs:
+- job: CreateSelfhostedAgent
+  displayName: 'Run Selfhosted Agent'
+  pool:
+    name: 'Default'
+    vmImage: 'selfhostedagent'
 
 variables:
   solution: '**/*.sln'
