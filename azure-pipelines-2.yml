@@ -20,11 +20,11 @@ jobs:
 
     -task: NuGetToolInstaller@1
 
-    -task2: NuGetCommand@2
+    -task1: NuGetCommand@2
     inputs1:
       restoreSolution: '$(solution)'
 
-    -task3: VSBuild@1
+    -task2: VSBuild@1
     inputs2:
     solution: '$(solution)'
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
